@@ -1,3 +1,6 @@
+import Utilities from "../../support/Utilities";
+
+const utilities = new Utilities();
 
 export default class ReportPage {
 
@@ -5,6 +8,7 @@ export default class ReportPage {
     static REPORT_EXPECTED_AND_ACTUAL_ELEMENT = 'td.listViewTd.text-right'
 
     verifyReportStatuses() {
+        utilities.waitForAjax();
         cy.get(ReportPage.REPORT_STATUS_ELEMENT).then($badges => {
             const hasStartingSoonOrComplete = $badges.toArray().some(el =>
                 el.textContent.includes('Starting Soon') ||

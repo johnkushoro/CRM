@@ -27,6 +27,7 @@ export default class ContactCreationPage {
     }
 
     selectOptionFromDropdownBySalutation(salutation) {
+        utilities.waitForAjax();
         cy.get(ContactCreationPage.SALUTATION_DROPDOWN_SELECTOR).should('be.visible').click({ force: true });
         cy.contains(ContactCreationPage.MENU_OPTION_SELECTOR, salutation).should('be.visible').click({ force: true });
     }
