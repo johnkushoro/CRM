@@ -1,6 +1,7 @@
 import 'cypress-wait-until';
 import Utilities from "../../support/Utilities";
 
+
 const utilities = new Utilities();
 export default class ContactCreationPage {
 
@@ -31,14 +32,13 @@ export default class ContactCreationPage {
     }
 
     enterCategoryOptionIntoInputField(categories) {
-         categories.forEach((category) => {
-            utilities.waitForAjax();
-            cy.get('#DetailFormcategories-input').trigger('mouseover').click({force: true});
+        categories.forEach((category) => {
+            cy.get('#DetailFormcategories-input').trigger('mouseover').click();
             cy.get('#DetailFormcategories-input-search-text > input').should('be.visible').clear().type(category);
             cy.contains('.menu-option.single .option-cell.input-label', category).should('be.visible').click();
-            cy.wait(500); // Adding a brief delay to ensure the UI updates; adjust as needed
         });
     }
+
 
     selectContactInformationByLabelText(labelText, optionText) {
         utilities.waitForAjax();
