@@ -30,3 +30,24 @@ After((scenario) => {
         customLog(`Scenario ${scenarioName} PASSED`);
     }
 });
+
+
+After((scenario) => {
+    if (Cypress.env('scenarioStatus') === 'passed') {
+        // Example cleanup code; adjust based on your application's API
+        const contactId = Cypress.env('createdContactId'); // Ensure you set this environment variable after creating a contact
+        if (contactId) {
+            cy.request('DELETE', `/api/contacts/${contactId}`).then((response) => {
+                expect(response.status).to.eq(200);
+                Cypress.log({name: 'cleanup', message: `Deleted contact ${contactId}`});
+            });
+        }
+    }
+});
+
+
+After((scenario) => {
+    if (Cypress.env('scenarioStatus') === 'failed') {
+        cy.screenshot({ capture: 'runner', name: `Failure-${scenario.pickle.name}-${Date.now()}` });
+    }
+});
