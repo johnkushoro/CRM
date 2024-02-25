@@ -21,14 +21,10 @@ class LoginPage {
     }
 
     closePopUp() {
-        cy.get('body').then(($body) => {
-            if ($body.find(LoginPage.CLOSE_BUTTON_POPUP_SELECTOR).length) {
-                cy.get(LoginPage.CLOSE_BUTTON_POPUP_SELECTOR).should('be.visible').then($button => {
-                    if ($button.is(':visible')) {
-                        cy.wrap($button).click({force: true});
-                    }
-                });
-            }
+        cy.get('body').then(body => {
+            body.find(LoginPage.CLOSE_BUTTON_POPUP_SELECTOR).length > 0
+                ? cy.get(LoginPage.CLOSE_BUTTON_POPUP_SELECTOR).click()
+                : cy.log('Popup dialog did not appear, proceeding with the test.');
         });
     }
 }

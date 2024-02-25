@@ -49,6 +49,7 @@ export default class ActivityLogPage {
     }
 
     verifyItemsRemoved(selectedTexts) {
+        utilities.waitForAjax();
         Object.entries(selectedTexts).forEach(([identifier, text]) => {
             cy.get('body').should(($body) => {
                 console.log(`Verifying removal of item with text: "${text}" and identifier: "${identifier}"`);
