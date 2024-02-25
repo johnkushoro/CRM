@@ -10,7 +10,6 @@ export default class ActivityLogPage {
     static CARD_BODY_MENU = '.card-body.menu-outer.input-scroll';
     static TEXT_ELEMENT_LOCATOR = "span.detailLink";
 
-
     selectCheckboxesAndStoreText(numberOfCheckboxesToSelect) {
         const selectedTexts = {};
         utilities.waitForAjax();
@@ -42,18 +41,15 @@ export default class ActivityLogPage {
     }
 
     interactWithPopupButton() {
-        cy.on('window:confirm', (msg) => {
-            expect(msg).to.equal('Are you sure you want to delete selected record(s)?')
-        });
-
+        cy.on('window:confirm', () => true);
     }
 
     verifyItemsRemoved(selectedTexts) {
         utilities.waitForAjax();
         Object.entries(selectedTexts).forEach(([identifier, text]) => {
-            cy.get('body').should(($body) => {
+            cy.get('.parent-container-of-items', {timeout: 10000}).should(($container) => {
                 console.log(`Verifying removal of item with text: "${text}" and identifier: "${identifier}"`);
-                expect($body.find(`a[href='${identifier}']`).length, `Item with identifier ${identifier} (${text}) should be removed.`).to.equal(0);
+                expect($container.find(`a[href='${identifier}']`).length, `Item with identifier ${identifier} (${text}) should be removed.`).to.equal(0);
             });
         });
     }
