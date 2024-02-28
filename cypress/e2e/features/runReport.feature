@@ -1,8 +1,7 @@
 Feature: Verify Run Report Functionality
 
   Background:
-    Given I navigate to the website "CRM_CLOUD_BASE_URL"
-    And I successfully logged in
+    Given I am logged in using "API"
 
   Scenario: Running Report
     When I run a report

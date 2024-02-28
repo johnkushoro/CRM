@@ -6,7 +6,7 @@ import {dataStore} from "../../support/dataStore";
 const reusableElements = new GenericElements();
 const contactDataPage = new ContactDataPage();
 
-Then(/^the created contact data matches the entered data$/, function () {
+Then(/^the created contact data should match the entered data$/, function () {
     reusableElements.clickLinkWithText("Contacts");
 
     const storedSalutation = dataStore.getValue('storedSalutation');

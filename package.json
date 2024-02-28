@@ -12,6 +12,7 @@
     "cypress:runner:headed": "cypress run --headed --browser chrome",
     "cypress:execution": "cypress run --spec 'cypress/e2e/features/*'",
     "cypress:parallel": "concurrently 'npm run cypress:run:createContactTest' 'npm run cypress:run:runReportTest' 'npm run cypress:run:removeActivityLogTest'",
+    "cypress:crm_api_login": "npx cypress run --spec 'cypress/e2e/features/crm_api_login.feature' --headed --browser chrome && node cucumber-html-report.js",
     "cypress:run:createContactTest": "npx cypress run --spec 'cypress/e2e/features/createContact.feature' --headed --browser chrome && node cucumber-html-report.js",
     "cypress:run:runReportTest": "npx cypress run --spec 'cypress/e2e/features/runReport.feature' --headed --browser chrome && node cucumber-html-report.js",
     "cypress:run:removeActivityLogTest": "npx cypress run --spec 'cypress/e2e/features/removeActivityLog.feature' --headed --browser chrome && node cucumber-html-report.js"
